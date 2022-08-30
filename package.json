@@ -1,5 +1,34 @@
 {
+  "name": "cise_ass1a_worksheet3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "app": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-postbuild": "cd client && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JordanTownshend/CISE_51_Group6.git"
+  },
+  "author": "Jordan, Aditya & Allen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JordanTownshend/CISE_51_Group6/issues"
+  },
+  "homepage": "https://github.com/JordanTownshend/CISE_51_Group6#readme",
   "dependencies": {
-    "create-react-app": "^5.0.1"
+    "body-parser": "^1.20.0",
+    "config": "^3.3.7",
+    "cors": "^2.8.5",
+    "create-react-app": "^5.0.1",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "mongoose": "^6.5.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
   }
 }
