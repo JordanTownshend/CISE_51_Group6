@@ -4,8 +4,10 @@ var cors = require('cors');
 const path = require('path');
 const uri = process.env.MONGODB_URI;
 
-// routess
+// routes
 const app = express();
+
+const submissions = require('./routes/api/submissions');
 
 // Connect Database
 connectDB();
@@ -14,6 +16,8 @@ connectDB();
 app.use(cors({ origin: true, credentials: true }));
 
 // use Routes
+app.use('/api/submissions', submissions);
+
 const port = process.env.PORT || 8082;
 
 app.listen(port, () => console.log(`Server running on port ${port}`));

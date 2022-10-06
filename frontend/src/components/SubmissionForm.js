@@ -1,10 +1,25 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import axios from 'axios';
+
+var result;
+
+const onSubmit = e => {
+  e.preventDefault();
+
+  axios
+    .post('https://cise-51-group6-app.herokuapp.com/api/submissions/', result)
+    .then(res => {
+      this.props.history.push('/');
+    })
+    .catch(err => {
+      console.log("Error in SubmissionForm!");
+    })
+};
 
 const SubmissionForm = () => {
   const { register, handleSubmit, formState: {errors} } = useForm();
-  const [result, setResult] = useState("");
-  const onSubmit = (data) => setResult(JSON.stringify(data));
+  result = useState("");
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -23,9 +38,9 @@ const SubmissionForm = () => {
       <p>{errors.journal && <span>Journal field is required</span>}</p>
       <p>{errors.pubyear && <span>Publication Year field is required</span>}</p>
 
-      <p>{result}</p>
       <input type="submit" />
     </form>
   );
 }
+
 export default SubmissionForm;
