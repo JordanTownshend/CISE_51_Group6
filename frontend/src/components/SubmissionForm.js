@@ -5,11 +5,19 @@ import axios from 'axios';
 var result;
 
 const onSubmit = e => {
-  e.preventDefault();
-
   axios
-    .post('https://cise-51-group6-app.herokuapp.com/api/submissions/', result)
+    .post('http://localhost:5001/api/submissions/', result)
     .then(res => {
+      this.setState({
+        author: '',
+        title:'',
+        journal:'',
+        pubyear:'',
+        volume:'',
+        doi:'',
+        issn: '',
+        other: ''
+      })
       this.props.history.push('/');
     })
     .catch(err => {
@@ -19,7 +27,7 @@ const onSubmit = e => {
 
 const SubmissionForm = () => {
   const { register, handleSubmit, formState: {errors} } = useForm();
-  result = useState("");
+  result = useState();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

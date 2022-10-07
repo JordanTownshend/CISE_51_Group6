@@ -12,3 +12,5 @@ router.post('/', (req, res) => {
       .then(Submission => res.json({ msg: 'Submission added successfully' }))
       .catch(err => res.status(400).json({ error: 'Unable to add submission' }));
   });
+
+  module.exports = router;
