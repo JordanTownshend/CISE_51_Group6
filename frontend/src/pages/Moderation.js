@@ -1,11 +1,15 @@
 import React from "react";
+import ModerationForm from "../components/ModerationForm";
  
 const Moderation = () =>  {
-    return (
-      <div>
-        <h2> SEED Mod </h2>
-      </div>
-    );
-  }
- 
+  return (
+   <div>
+     <h2>Moderate Article</h2>
+         <p>This is a form to allow moderators to check an article for moderation in our SEED repo.</p>
+         <ModerationForm/>
+     </div>
+ );
+}
+
 export default Moderation;
+
