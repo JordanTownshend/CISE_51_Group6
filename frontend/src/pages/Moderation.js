@@ -5,7 +5,7 @@ const Moderation = () =>  {
   return (
    <div>
      <h2>Moderate Article</h2>
-         <p>This is a form to allow moderators to check an article for moderation in our SEED repo.</p>
+         <p>This is the form to allow moderators to check an article for moderation in our SEED repo.</p>
          <ModerationForm/>
      </div>
  );
