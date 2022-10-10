@@ -19,7 +19,7 @@ const SubmissionSchema = new mongoose.Schema({
     required: true
   },
   pubyear: {
-    type: Date,
+    type: String,
     required: true
   },
   volume: {

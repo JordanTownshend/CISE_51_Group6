@@ -5,9 +5,9 @@ const path = require('path');
 const uri = process.env.MONGODB_URI;
 
 // routes
-const app = express();
-
 const submissions = require('./routes/api/submissions');
+
+const app = express();
 
 // Connect Database
 connectDB();

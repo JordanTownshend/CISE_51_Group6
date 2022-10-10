@@ -4,6 +4,11 @@ const router = express.Router();
 // Load Submission model
 const Submission = require('../../models/Submission');
 
+// @route GET api/submissions/test
+// @description tests submissions route
+// @access Public
+router.get('/test', (req, res) => res.send('route testing!'));
+
 // @route GET api/submissions
 // @description add/save submission
 // @access Public
