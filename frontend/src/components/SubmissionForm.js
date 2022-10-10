@@ -1,41 +1,39 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 
 const SubmissionForm = () => {
-  const { register, handleSubmit, formState: {errors} } = useForm();
-  const [result, setResult] = useState("");
+  const { register, formState: {errors}, getValues } = useForm();
 
-  const onSubmit = (submission) => {
-  
-    const temp = setResult(JSON.stringify(submission));
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
     const data = {
-      author: temp.author,
-      title: temp.title,
-      journal: temp.journal,
-      pubyear: temp.pubyear,
-      volume: temp.volume,
-      doi: temp.doi,
-      issn: temp.issn,
-      other: temp.other,
+      author: getValues("author"),
+      title: getValues("title"),
+      journal: getValues("journal"),
+      pubyear: getValues("pubyear"),
+      volume: getValues("volume"),
+      doi: getValues("doi"),
+      issn: getValues("issn"),
+      other: getValues("other"),
       status: 'submitted'
     }
-  
-    console.log(data)
+
     axios
       .post('/api/submissions/', data)
       .then(res => {
+        this.props.history.push('/');
         console.log("Post response")
       })
       .catch(err => {
-        console.log("Error in SubmissionForm!" + err.response);
+        console.log("Error in SubmissionForm!");
       })
   };
   
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit}>
     
       <input {...register("author", {required: true})} placeholder="Author" data-testid = "author"/>
       <p><input {...register("title", {required: true})} placeholder="Title" data-testid = "title"/></p>
@@ -51,7 +49,6 @@ const SubmissionForm = () => {
       <p>{errors.journal && <span>Journal field is required</span>}</p>
       <p>{errors.pubyear && <span>Publication Year field is required</span>}</p>
 
-      <p>{result}</p>
       <input type="submit" />
     </form>
   );
