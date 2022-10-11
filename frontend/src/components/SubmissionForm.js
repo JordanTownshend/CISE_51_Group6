@@ -22,7 +22,7 @@ const SubmissionForm = () => {
     console.log(JSON.stringify(data));
 
     axios
-      .post('https://cise-51-group6-app.herokuapp.com/api/submissions', data)
+      .post('https://cise-51-group6-app.herokuapp.com/api/submissions/', data)
       .then(res => {
         console.log("Post response")
       })
