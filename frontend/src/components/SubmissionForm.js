@@ -1,13 +1,41 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
+import axios from 'axios';
 
 const SubmissionForm = () => {
-  const { register, handleSubmit, formState: {errors} } = useForm();
-  const [result, setResult] = useState("");
-  const onSubmit = (data) => setResult(JSON.stringify(data));
+  const { register, formState: {errors}, getValues } = useForm();
+
+  const handleSubmit = (e) => {
+
+    e.preventDefault();
+
+    const data = {
+      title: getValues("title"),
+      author: getValues("author"),
+      journal: getValues("journal"),
+      pubyear: getValues("pubyear"),
+      volume: getValues("volume"),
+      doi: getValues("doi"),
+      issn: getValues("issn"),
+      other: getValues("other"),
+      status: 'submitted'
+    }
+
+    console.log(JSON.stringify(data));
+
+    axios
+      .post('/api/submissions/', data)
+      .then(res => {
+        console.log("Post response");
+      })
+      .catch(err => {
+        console.log("Error in SubmissionForm!" + err);
+      })
+  };
+  
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit}>
     
       <input {...register("author", {required: true})} placeholder="Author" data-testid = "author"/>
       <p><input {...register("title", {required: true})} placeholder="Title" data-testid = "title"/></p>
@@ -23,9 +51,9 @@ const SubmissionForm = () => {
       <p>{errors.journal && <span>Journal field is required</span>}</p>
       <p>{errors.pubyear && <span>Publication Year field is required</span>}</p>
 
-      <p>{result}</p>
       <input type="submit" />
     </form>
   );
 }
+
 export default SubmissionForm;
