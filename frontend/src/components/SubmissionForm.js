@@ -3,9 +3,11 @@ import { useForm } from "react-hook-form";
 import axios from 'axios';
 
 const SubmissionForm = () => {
-  const { register, formState: {errors}, getValues, handleSubmit } = useForm();
+  const { register, formState: {errors}, getValues } = useForm();
 
-  const onSubmit = (e) => {
+  const handleSubmit = (e) => {
+
+    e.preventDefault();
 
     const data = {
       title: getValues("title"),
@@ -22,9 +24,9 @@ const SubmissionForm = () => {
     console.log(JSON.stringify(data));
 
     axios
-      .post('https://cise-51-group6-app.herokuapp.com/api/submissions/', data)
+      .post('/api/submissions/', data)
       .then(res => {
-        console.log("Post response")
+        console.log("Post response");
       })
       .catch(err => {
         console.log("Error in SubmissionForm!" + err);
@@ -33,7 +35,7 @@ const SubmissionForm = () => {
   
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit}>
     
       <input {...register("author", {required: true})} placeholder="Author" data-testid = "author"/>
       <p><input {...register("title", {required: true})} placeholder="Title" data-testid = "title"/></p>

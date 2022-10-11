@@ -13,7 +13,6 @@ router.get('/', (req, res) => res.send('route testing!'));
 // @description add/save submission
 // @access Public
 router.post('/', (req, res) => {
-  console.log(req.body);
     Submission.create(req.body)
       .then(submission => res.json({ msg: 'Submission added successfully' }))
       .catch(err => res.status(400).json({ error: 'Unable to add submission'}));

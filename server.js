@@ -16,7 +16,7 @@ connectDB();
 app.use(cors({ origin: true, credentials: true }));
 
 // use Routes
-app.use('/api/submissions', submissions);
+app.use('/api/submissions/', submissions);
 
 const port = process.env.PORT || 8082;
 
