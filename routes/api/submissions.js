@@ -18,4 +18,49 @@ router.post('/', (req, res) => {
       .catch(err => res.status(400).json({ error: 'Unable to add submission'}));
   });
 
+  // @route GET api/submissions
+// @description Get all submissions
+// @access Public
+router.get('/', (req, res) => {
+  Submission.find()
+    .then(submissions => res.json(submissions))
+    .catch(err => res.status(404).json({ nosubmissionsfound: 'No submissions found' }));
+});
+router.post('/search_Submission', (req, res) => {
+  Submission.find({'title':req.body.title})
+    .then(submissions => res.json(submissions))
+    .catch(err => res.status(404).json({ nosubmissionsfound: 'No Submission found' }));
+});
+
+
+// @route GET api/submissions/:id
+// @description Get single article by id
+// @access Public
+router.get('/:id', (req, res) => {
+  Submission.findById(req.params.id)
+    .then(submission => res.json(submission))
+    .catch(err => res.status(404).json({ noarticlefound: 'No article found' }));
+});
+
+// @route GET api/submissions/:id
+// @description Update article
+// @access Public
+router.put('/:id', (req, res) => {
+  Submission.findByIdAndUpdate(req.params.id, req.body)
+    .then(submission => res.json({ msg: 'Updated successfully' }))
+    .catch(err =>
+      res.status(400).json({ error: 'Unable to update the Database' })
+    );
+});
+
+// @route GET api/submissions/:id
+// @description Delete article by id
+// @access Public
+router.delete('/:id', (req, res) => {
+  Submission.findByIdAndRemove(req.params.id, req.body)
+    .then(submission => res.json({ mgs: 'article entry deleted successfully' }))
+    .catch(err => res.status(404).json({ error: 'No such a article' }));
+});
+
+
   module.exports = router;

@@ -18,7 +18,8 @@ const SubmissionForm = () => {
       doi: getValues("doi"),
       issn: getValues("issn"),
       other: getValues("other"),
-      status: 'submitted'
+      status: 'submitted',
+      suggestions: ''
     }
 
     console.log(JSON.stringify(data));
