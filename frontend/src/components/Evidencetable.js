@@ -1,6 +1,7 @@
 import React, {useMemo} from "react";
 import articles from "../dummydata/article.js";
 import { useTable, useSortBy, usePagination } from 'react-table';
+import Checkbox from "./Checkbox.js";
 
 const Table = ({columns, data}) => {
 const {
@@ -26,16 +27,81 @@ const {
     {
       columns,
       data,
-      initialState: { pageIndex: 0 },
+      initialState: { pageIndex: 0},
     },
     
     useSortBy,
     usePagination
   )
+  
+  //Checkboxes for column visibility
+  const [checkedTitle] = React.useState(true);
+  const [checkedAuthor] = React.useState(true);
+  const [checkedJournal] = React.useState(true);
+  const [checkedPubyear] = React.useState(true);
+  const [checkedVolume] = React.useState(true);
+  const [checkedDOI] = React.useState(true);
+  const [checkedISSN] = React.useState(true);
+  const [checkedOther] = React.useState(true);
+  const [checkedStatus] = React.useState(true);
+  const [checkedSuggestions] = React.useState(true);
 
   // Render Data Table UI
   return (
     <>
+    <div>
+      <Checkbox
+        label="Title"
+        value={checkedTitle}
+        onChange={console.log("Checkbox change")}
+      />
+      <Checkbox
+        label="Author"
+        value={checkedAuthor}
+        onChange={console.log("Checkbox change")}
+      />
+      <Checkbox
+        label="Journal"
+        value={checkedJournal}
+        onChange={console.log("Checkbox change")}
+      />
+      <Checkbox
+        label="Pub. Year"
+        value={checkedPubyear}
+        onChange={console.log("Checkbox change")}
+      />
+      <Checkbox
+        label="Volume"
+        value={checkedVolume}
+        onChange={console.log("Checkbox change")}
+      />
+      <Checkbox
+        label="DOI"
+        value={checkedDOI}
+        onChange={console.log("Checkbox change")}
+      />
+      <Checkbox
+        label="ISSN"
+        value={checkedISSN}
+        onChange={console.log("Checkbox change")}
+      />
+      <Checkbox
+        label="Other"
+        value={checkedOther}
+        onChange={console.log("Checkbox change")}
+      />
+      <Checkbox
+        label="Status"
+        value={checkedStatus}
+        onChange={console.log("Checkbox change")}
+      />
+      <Checkbox
+        label="Suggestions"
+        value={checkedSuggestions}
+        onChange={console.log("Checkbox change")}
+      />
+    </div>
+      <div className="h-4" />
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map(headerGroup => (
@@ -118,7 +184,6 @@ const {
         </select>
       </div>
     </>
-
   )
 };
   
